@@ -4,6 +4,7 @@
 package com.gooddata;
 
 import com.gooddata.account.AccountService;
+import com.gooddata.connector.ConnectorService;
 import com.gooddata.dataset.DatasetService;
 import com.gooddata.gdc.DataStoreService;
 import com.gooddata.gdc.GdcService;
@@ -59,6 +60,7 @@ public class GoodData {
     private final DataStoreService dataStoreService;
     private final DatasetService datasetService;
     private final ReportService reportService;
+    private final ConnectorService connectorService;
 
     /**
      * Create instance configured to communicate with GoodData Platform under user with given credentials.
@@ -111,6 +113,7 @@ public class GoodData {
         dataStoreService = new DataStoreService(httpClientBuilder, gdcService, login, password);
         datasetService = new DatasetService(restTemplate, dataStoreService);
         reportService = new ReportService(restTemplate);
+        connectorService = new ConnectorService(restTemplate, projectService);
     }
 
     private RestTemplate createRestTemplate(String login, String password, String hostname, HttpClientBuilder builder,
@@ -227,4 +230,7 @@ public class GoodData {
         return reportService;
     }
 
+    public ConnectorService getConnectorService() {
+        return connectorService;
+    }
 }

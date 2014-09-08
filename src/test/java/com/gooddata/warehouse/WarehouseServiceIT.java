@@ -102,7 +102,7 @@ public class WarehouseServiceIT extends AbstractGoodDataIT {
     public void shouldGetWarehouse() throws Exception {
         onRequest()
                 .havingMethodEqualTo("GET")
-                .havingPathEqualTo(warehouse.getSelfLink())
+                .havingPathEqualTo(warehouse.getUri())
                 .respond()
                 .withBody(readResource(WAREHOUSE))
                 .withStatus(200);
@@ -122,12 +122,12 @@ public class WarehouseServiceIT extends AbstractGoodDataIT {
 
         onRequest()
                 .havingMethodEqualTo("PUT")
-                .havingPathEqualTo(warehouse.getSelfLink())
+                .havingPathEqualTo(warehouse.getUri())
                 .respond()
                 .withStatus(204);
         onRequest()
                 .havingMethodEqualTo("GET")
-                .havingPathEqualTo(warehouse.getSelfLink())
+                .havingPathEqualTo(warehouse.getUri())
                 .respond()
                 .withBody(MAPPER.writeValueAsString(toUpdate))
                 .withStatus(200);
@@ -138,7 +138,7 @@ public class WarehouseServiceIT extends AbstractGoodDataIT {
 
         verifyThatRequest()
                 .havingMethodEqualTo("PUT")
-                .havingPathEqualTo(warehouse.getSelfLink())
+                .havingPathEqualTo(warehouse.getUri())
                 .havingBody(new BaseMatcher<String>() {
                     @Override
                     public boolean matches(Object o) {
